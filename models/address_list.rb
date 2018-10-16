@@ -1,4 +1,5 @@
 require_relative 'entry'
+require "csv"
 
 class AddressList
   attr_reader :entries
@@ -18,6 +19,17 @@ class AddressList
     end
 
     entries.insert(index, Entry.new(name, phone_number, email))
+  end
+
+  def import_from_csv(file_name)
+    csv_text = File.read(file_name)
+    csv = CSV.parse(csv_text, headers: true, skip_blanks: true)    #parse file into a CSV::Table object
+    #iterate over table and create a hash for each row
+    csv.each do |row|
+      row_hash = row.to_hash
+      #convert each row_hash to an entry and add to address_list
+      create_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
+    end
   end
 
   def delete_entry(name, phone_number, email)
