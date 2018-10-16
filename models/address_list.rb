@@ -42,4 +42,24 @@ class AddressList
     end
     @entries.delete(selected_entry)
   end
+
+  def binary_search(name)
+
+    lower = 0    #leftmost item
+    upper = entries.length - 1    #rightmost item
+
+    while lower <= upper
+      mid = (lower + upper) / 2    #find the middle index, then store that name as mid_name
+      mid_name = entries[mid].name
+
+      if name == mid_name
+        return entries[mid]
+      elsif name < mid_name    #name comes alphabetically before mid_name, so name must be in lower half of array
+        upper = mid - 1
+      elsif name > mid_name    #name comes alphabetically after mid_name, so name must be in upper half of array
+        lower = mid + 1
+      end
+    end
+    return nil    #if no match was found
+  end
 end

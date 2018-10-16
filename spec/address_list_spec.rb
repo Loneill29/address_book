@@ -132,4 +132,25 @@ RSpec.describe AddressList do
       check_entry(entry_three, "Sam", "222-222-2222", "sam@email.com")
     end
   end
+
+  describe "#binary_search" do
+    it "searches the address_list for an entry that doesn't exist" do
+      list.import_from_csv("entries.csv")
+      entry = list.binary_search("Paul")
+      expect(entry).to be_nil
+    end
+
+    it "searches the address_list for an entry that does exist (Sara)" do
+      list.import_from_csv("entries.csv")
+      entry = list.binary_search("Sara")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Sara", "555-555-5555", "sara@email.com")
+    end
+
+    it "searches the address_list for an entry that doesn't exist" do
+      list.import_from_csv("entries.csv")
+      entry = list.binary_search("Brrian")
+      expect(entry).to be_nil
+    end
+  end
 end
