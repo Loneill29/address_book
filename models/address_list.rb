@@ -62,4 +62,14 @@ class AddressList
     end
     return nil    #if no match was found
   end
+
+  def interative_search(name)
+    #optional iterative search
+    @entries.each do |entry|
+      if entry.name == name
+        return entry
+      end
+    end
+    return nil
+  end
 end

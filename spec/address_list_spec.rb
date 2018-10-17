@@ -153,4 +153,25 @@ RSpec.describe AddressList do
       expect(entry).to be_nil
     end
   end
+
+  describe "#interative_search" do
+    it "iterates address_list for an entry that doesn't exist" do
+      list.import_from_csv("entries.csv")
+      entry = list.interative_search("Paul")
+      expect(entry).to be_nil
+    end
+
+    it "iterates address_list for an entry that does exist" do
+      list.import_from_csv("entries.csv")
+      entry = list.interative_search("Sara")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Sara", "555-555-5555", "sara@email.com")
+    end
+
+    it "searches the address_list for an entry that doesn't exist" do
+      list.import_from_csv("entries.csv")
+      entry = list.interative_search("Brrian")
+      expect(entry).to be_nil
+    end
+  end     
 end
