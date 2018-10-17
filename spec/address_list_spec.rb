@@ -173,5 +173,16 @@ RSpec.describe AddressList do
       entry = list.interative_search("Brrian")
       expect(entry).to be_nil
     end
-  end     
+  end
+
+  describe "#delete_all" do
+    it "deletes all entries" do
+      list.create_entry("Bill", "123-333-4444", "bill@email.com")
+      list.create_entry("Bob", "123-223-4664", "bob@email.com")
+      list.create_entry("Brian", "123-553-4224", "brian@email.com")
+
+      list.delete_all
+      expect(list.entries.size).to eq(0)
+    end
+  end
 end

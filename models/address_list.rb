@@ -43,8 +43,11 @@ class AddressList
     @entries.delete(selected_entry)
   end
 
-  def binary_search(name)
+  def delete_all
+    @entries = []
+  end
 
+  def binary_search(name)
     lower = 0    #leftmost item
     upper = entries.length - 1    #rightmost item
 
